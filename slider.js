@@ -28,8 +28,12 @@ $(function(){
 
     function advance() {
       if($gallery.is(':animated')) return;
-      $gallery.animate({'margin-left': direction+width}, speed, movement );
+      udpateGallery();
     }
+
+      function udpateGallery() {
+        $gallery.animate({'margin-left': direction+width}, speed, movement );
+      }
 
       function movement() {
         updateCurrent();
@@ -49,14 +53,14 @@ $(function(){
 
         function currentWrapDown() {
           if (current === 0 ) {
-            current = photoCount -1;
+            current = photoCount;
             $gallery.css({'margin-left': '-5000px'});
           };
         }
 
         function updateDots() {
-          $dots.removeClass('active');
-          $('#dot'+current).addClass('active');
+          $dots.animate({'opacity': 0.4}, {duration: speed, queue: false});
+          $('#dot'+current).animate({'opacity': 1}, {duration: speed, queue: false});
         }
 
   //activation
