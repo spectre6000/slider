@@ -53,7 +53,7 @@ $(function(){
 
         function currentWrapDown() {
           if (current === 0 ) {
-            current = photoCount;
+            current = photoCount-1;
             $gallery.css({'margin-left': '-5000px'});
           };
         }
