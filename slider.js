@@ -40,6 +40,7 @@ $(function(){
         currentWrapUp();
         currentWrapDown();
         updateDots();
+
       }
 
         function updateCurrent(){ direction === next ? current++ : current--; }
@@ -61,6 +62,7 @@ $(function(){
         function updateDots() {
           $dots.animate({'opacity': 0.4}, {duration: speed, queue: false});
           $('#dot'+current).animate({'opacity': 1}, {duration: speed, queue: false});
+          direction = next;
         }
 
   //activation
