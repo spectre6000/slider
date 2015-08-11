@@ -33,45 +33,18 @@ $(function(){
       udpateGallery();
     }
 
-      function udpateGallery() {
-        $gallery.animate({'margin-left': direction+width}, speed, photoMovement );
-      }
-
-      function photoMovement() {
-        photoUpdateCurrent();
-        photoWrapUp();
-        photoWrapDown();
-        direction = next;
-      }
-
       function dotMovement() {
-        dotUpdateCurrent();
+        dotStep();
         dotWrapUp();
         dotWrapDown();
         updateDots()
       }
 
-        function photoUpdateCurrent(){ direction === next ? currentPhoto++ : currentPhoto--; }
-
-        function dotUpdateCurrent(){ direction === next ? currentDot++ : currentDot--; }
-
-        function photoWrapUp() {
-          if (currentPhoto === photoCount) {
-            currentPhoto = 1;
-            $gallery.css({'margin-left': '-1000px'});
-          };
-        }
+        function dotStep(){ direction === next ? currentDot++ : currentDot--; }
 
         function dotWrapUp() {
           if (currentDot === photoCount) {
             currentDot = 1;
-          };
-        }
-
-        function photoWrapDown() {
-          if (currentPhoto === 0 ) {
-            currentPhoto = photoCount-1;
-            $gallery.css({'margin-left': '-5000px'});
           };
         }
 
@@ -85,6 +58,33 @@ $(function(){
           $dots.animate({'opacity': 0.4}, {duration: speed, queue: false});
           $('#dot'+currentDot).animate({'opacity': 1}, {duration: speed, queue: false});
         }
+
+      function udpateGallery() {
+        $gallery.animate({'margin-left': direction+width}, speed, photoMovement );
+      }
+
+        function photoMovement() {
+          photoStep();
+          photoWrapUp();
+          photoWrapDown();
+          direction = next;
+        }
+
+          function photoStep(){ direction === next ? currentPhoto++ : currentPhoto--; }
+
+          function photoWrapUp() {
+            if (currentPhoto === photoCount) {
+              currentPhoto = 1;
+              $gallery.css({'margin-left': '-1000px'});
+            };
+          }
+
+          function photoWrapDown() {
+            if (currentPhoto === 0 ) {
+              currentPhoto = photoCount-1;
+              $gallery.css({'margin-left': '-5000px'});
+            };
+          }
 
   //activation
     start();
