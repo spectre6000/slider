@@ -12,7 +12,8 @@ $(function(){
     var width = 1000;
     var speed = 1000;
     var duration = 2000;
-    var current = 1;
+    var currentPhoto = 1;
+    var currentDot = 1;
     var photoCount = $photos.length-1;
 
   //variables
@@ -28,41 +29,61 @@ $(function(){
 
     function advance() {
       if($gallery.is(':animated')) return;
+      dotMovement();
       udpateGallery();
     }
 
       function udpateGallery() {
-        $gallery.animate({'margin-left': direction+width}, speed, movement );
+        $gallery.animate({'margin-left': direction+width}, speed, photoMovement );
       }
 
-      function movement() {
-        updateCurrent();
-        currentWrapUp();
-        currentWrapDown();
-        updateDots();
-
+      function photoMovement() {
+        photoUpdateCurrent();
+        photoWrapUp();
+        photoWrapDown();
+        direction = next;
       }
 
-        function updateCurrent(){ direction === next ? current++ : current--; }
+      function dotMovement() {
+        dotUpdateCurrent();
+        dotWrapUp();
+        dotWrapDown();
+        updateDots()
+      }
 
-        function currentWrapUp() {
-          if (current === photoCount) {
-            current = 1;
+        function photoUpdateCurrent(){ direction === next ? currentPhoto++ : currentPhoto--; }
+
+        function dotUpdateCurrent(){ direction === next ? currentDot++ : currentDot--; }
+
+        function photoWrapUp() {
+          if (currentPhoto === photoCount) {
+            currentPhoto = 1;
             $gallery.css({'margin-left': '-1000px'});
           };
         }
 
-        function currentWrapDown() {
-          if (current === 0 ) {
-            current = photoCount-1;
+        function dotWrapUp() {
+          if (currentDot === photoCount) {
+            currentDot = 1;
+          };
+        }
+
+        function photoWrapDown() {
+          if (currentPhoto === 0 ) {
+            currentPhoto = photoCount-1;
             $gallery.css({'margin-left': '-5000px'});
+          };
+        }
+
+        function dotWrapDown() {
+          if (currentDot === 0 ) {
+            currentDot = photoCount-1;
           };
         }
 
         function updateDots() {
           $dots.animate({'opacity': 0.4}, {duration: speed, queue: false});
-          $('#dot'+current).animate({'opacity': 1}, {duration: speed, queue: false});
-          direction = next;
+          $('#dot'+currentDot).animate({'opacity': 1}, {duration: speed, queue: false});
         }
 
   //activation
