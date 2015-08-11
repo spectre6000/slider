@@ -8,9 +8,10 @@
 }
 
   #gallery {
-    width: 6000px;
+    width: 7000px;
     height: 700px;
     margin: 0;
+    margin-left: -1000px;
     padding: 0;
     background-color: #000;
     list-style: none;
@@ -19,7 +20,7 @@
   }
 
     .photo {
-      margin-left: 0
+      margin-left: 0px;
     }
 
   #dots {
