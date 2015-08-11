@@ -13,7 +13,6 @@ $(function(){
     var speed = 1000;
     var duration = 2000;
     var current = 1;
-    var currentDot = 2;
     var photoCount = $photos.length-1;
 
     //variables
@@ -30,35 +29,26 @@ $(function(){
     function advance(direction) {
       if($gallery.is(':animated')) return;
 
-      // $("#dot" + current).animate({"opacity": 0.4}, speed);
-      // $("#dot" + currentDot).animate({"opacity": 1.0}, speed);
-
-      // $('.dot').animate({"opacity": 0.4}, speed);
-      // $('#dot' + current).animate({"opacity": 1}, speed);
-
-      if (current === 0 ) {
-        current = photoCount -1;
-        $gallery.css({'margin-left': '-5000px'});
-      };
-
       $gallery.animate({'margin-left': direction+width}, speed, function() {
 
         if (direction === next) {
           current ++;
-          // currentDot ++;
         } else {
           current --;
-          // currentDot --;
         };
-        
-        // if (currentDot === photoCount) {
-        //   currentDot = 1;
-        // };
       
         if (current === photoCount) {
           current = 1;
           $gallery.css({'margin-left': '-1000px'});
         };
+
+        if (current === 0 ) {
+          current = photoCount -1;
+          $gallery.css({'margin-left': '-5000px'});
+        };
+
+        $dots.removeClass('active');
+        $('#dot'+current).addClass('active');
 
       });
     };
