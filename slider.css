@@ -47,7 +47,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: #aaa;
+    background-color: #fff;
     opacity: .4;
     color: #000;
     font-size: 100px;
@@ -58,7 +58,7 @@
   }
 
     .control:hover {
-      opacity: 1.0;
+      opacity: 0.6;
       cursor: pointer;
     }
 

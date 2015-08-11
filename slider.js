@@ -20,35 +20,36 @@ $(function(){
     
 
     //mechanism
-    function start() {
-      period = setInterval(function() {
-
-        $("#dot" + current).animate({"opacity": 0.4}, speed);
-        $("#dot" + currentDot).animate({"opacity": 1.0}, speed);
-
-        $gallery.animate({'margin-left': "-="+width}, speed, function() {
-          
-          current ++;
-          currentDot ++;
-          
-          if (currentDot === $photos.length) {
-            currentDot = 1;
-          };
-          if (current === $photos.length) {
-            current = 1;
-            $gallery.css({'margin-left': 0});
-          };
-        });
-
-      }, duration);
+    function start(direction) {
+      period = setInterval(function(){advance(direction)}, duration);
     }
+
+    function advance(direction) {
+
+      $("#dot" + current).animate({"opacity": 0.4}, speed);
+      $("#dot" + currentDot).animate({"opacity": 1.0}, speed);
+
+      $gallery.animate({'margin-left': direction+width}, speed, function() {
+        
+        current ++;
+        currentDot ++;
+        
+        if (currentDot === $photos.length) {
+          currentDot = 1;
+        };
+        if (current === $photos.length) {
+          current = 1;
+          $gallery.css({'margin-left': 0});
+        };
+      });
+    };
 
     function pause() {
       clearInterval(period);
     }
 
     //activation
-    $gallery.on('mouseenter', pause).on('mouseleave', start);
+    $slider.on('mouseenter', pause).on('mouseleave', function() {start(next)} );
 
-    start();
+    start(next);
 });
